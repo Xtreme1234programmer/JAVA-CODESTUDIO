@@ -1,37 +1,29 @@
-import java.util.*;
+import java.io.*;
+import java.util.* ;
+
 public class Solution {
-    public static List< Integer > sortedArray(int []arr1, int []arr2) {
-        // Write your code here
-        int i=0,j=0;
-        int n=arr1.length;
-        int m=arr2.length;
-        
-  ArrayList<Integer > Union=new ArrayList<>(); // Uninon vector
-  while (i < n && j < m) {
-    if (arr1[i] <= arr2[j]) // Case 1 and 2
-    {
-      if (Union.size() == 0 || Union.get(Union.size()-1) != arr1[i])
-        Union.add(arr1[i]);
-      i++;
-    } else // case 3
-    {
-      if (Union.size() == 0 || Union.get(Union.size()-1) != arr2[j])
-        Union.add(arr2[j]);
-      j++;
+    public static int[] ninjaAndSortedArrays(int nums1[], int nums2[], int m, int n) {
+        // Write your code here.
+     
+        int i=m-1,j=n-1,k=n+m-1;
+
+        while(i>=0&&j>=0)
+        {
+            if(nums1[i]>nums2[j])
+            {
+                nums1[k]=nums1[i];
+                k--;
+                i--;
+            }
+            else
+            {
+                nums1[k]=nums2[j];
+                k--;
+                j--;
+            }
+        }
+        while(i>=0){nums1[k--]=nums1[i--];}
+        while(j>=0){nums1[k--]=nums2[j--];}
+        return nums1;
     }
-  }
-  while (i < n) // IF any element left in arr1
-  {
-    if (Union.get(Union.size()-1) != arr1[i])
-      Union.add(arr1[i]);
-    i++;
-  }
-  while (j < m) // If any elements left in arr2
-  {
-    if (Union.get(Union.size()-1) != arr2[j])
-      Union.add(arr2[j]);
-    j++;
-  }
-  return Union;
-}
 }
